@@ -60,5 +60,6 @@
     <orderEntry type="library" name="primitive-0.7.3.0" level="project" />
     <orderEntry type="library" name="semigroups-0.20" level="project" />
     <orderEntry type="library" name="void-0.7.3" level="project" />
+    <orderEntry type="library" name="split-0.2.3.5" level="project" />
   </component>
 </module>

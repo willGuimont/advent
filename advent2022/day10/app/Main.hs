@@ -4,6 +4,7 @@ module Main (main) where
 
 import Control.Lens
 import Control.Monad.Except (throwError)
+import qualified Data.List.Split as LS
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -58,6 +59,15 @@ execInstruction NoOp = waitCycles 1
 signalStrength :: Computer -> Int
 signalStrength c = view cycles c * view regX c
 
+isPixelLit :: Int -> Computer -> Bool
+isPixelLit p c = abs ((p `mod` 40) - x) <= 1
+  where
+    x = view regX c
+
+toPixel :: Bool -> Char
+toPixel False = '.'
+toPixel True = '#'
+
 main :: IO ()
 main = do
   input <- readFile "data/input.txt"
@@ -65,5 +75,9 @@ main = do
       initComputer = Computer 1 1
       states = scanl (flip execInstruction) initComputer program
       signal = filter (\s -> let n = view cycles s in (n - 20) `mod` 40 == 0) states
-  print $ signalStrength <$> signal
   print . sum $ signalStrength <$> signal
+
+  let cs = subtract 1 . view cycles <$> states
+      pixels = toPixel . uncurry isPixelLit <$> zip cs states
+      screen = LS.chunksOf 40 pixels
+  mapM_ putStrLn screen
