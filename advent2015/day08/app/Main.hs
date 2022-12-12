@@ -33,12 +33,20 @@ parseInput s = case parse (parseString `sepBy` newline) "input" s of
   Left err -> throwError $ show err
   Right x -> return x
 
+encode :: String -> String
+encode s = "\"" <> go s <> "\""
+  where
+    go ('\\' : xs) = "\\\\" <> go xs
+    go ('"' : xs) = "\\\"" <> go xs
+    go (x : xs) = [x] <> go xs
+    go [] = ""
+
 main :: IO ()
 main = do
   input <- readFile "data/input.txt"
   let literalSize = sum $ length <$> lines input
       (Right strings) = parseInput input
-      parsedSize = sum $ (subtract 2) . length <$> strings
-  print literalSize
-  print parsedSize
+      parsedSize = sum $ subtract 2 . length <$> strings
+      representationSize = sum $ length . encode <$> lines input
   print $ literalSize - parsedSize
+  print $ representationSize - literalSize
