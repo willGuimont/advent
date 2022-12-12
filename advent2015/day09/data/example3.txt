@@ -1,0 +1,6 @@
+A to B = 1000
+A to C = 1000
+A to D = 1000
+B to C = 1000
+B to D = 1000
+C to D = 1
