@@ -64,19 +64,6 @@ makeGraph n = [[0 | _ <- [1 .. n]] | _ <- [1 .. n]]
 addEdge :: Graph -> DistanceBetween -> Graph
 addEdge g (from, to, dist) = set (ix from . ix to) dist . set (ix to . ix from) dist $ g
 
-buildFloyd :: Graph -> Graph
-buildFloyd g = S.execState go g
-  where
-    go :: S.State Graph ()
-    go = do
-      let n = length g - 1
-      S.forM_ [0 .. n] $ \k -> do
-        S.forM_ [0 .. n] $ \i -> do
-          S.forM_ [0 .. n] $ \j -> do
-            let otherPath = if g !! i !! k == infinity || g !! k !! j == infinity then infinity else g !! i !! k + g !! k !! j
-            g' <- S.get
-            S.put $ set (ix i . ix j) (min (g !! i !! j) otherPath) g'
-
 fstOf3 :: (a, b, c) -> a
 fstOf3 (x, _, _) = x
 
@@ -108,6 +95,5 @@ main = do
       numCities = (1 +) . maximum . fmap (\(i, j, _) -> max i j) $ m
       gInit = makeGraph numCities
       g = foldl addEdge gInit m
-      g' = buildFloyd g
-  print . minimum $ shortestPath g' <$> [0 .. numCities - 1]
+  print . minimum $ shortestPath g <$> [0 .. numCities - 1]
   print . maximum $ getCostOfPath g <$> permutations [0 .. numCities - 1]
