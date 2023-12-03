@@ -21,6 +21,11 @@ description:         Please see the README on GitHub at <https://github.com/will
 
 dependencies:
 - base >= 4.7 && < 5
+- lens
+- parsec
+- containers
+- mtl
+- array
 
 ghc-options:
 - -Wall
@@ -32,6 +37,9 @@ ghc-options:
 - -Wmissing-home-modules
 - -Wpartial-fields
 - -Wredundant-constraints
+
+default-extensions:
+- ImportQualifiedPost
 
 library:
   source-dirs: src
