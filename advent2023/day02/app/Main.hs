@@ -1,12 +1,8 @@
-{-# LANGUAGE TemplateHaskell #-}
-
 module Main (main) where
 
-import Control.Lens
 import Control.Monad.Except
-import Data.Either (fromRight)
-import Text.ParserCombinators.Parsec
 import qualified Data.Map as M
+import Text.ParserCombinators.Parsec
 
 -- Types
 data Color
@@ -17,12 +13,14 @@ data Color
 
 data Draw = Draw
   { cubes :: M.Map Color Int
-  } deriving Show
+  }
+  deriving (Show)
 
 data Game = Game
-  { gameNum :: Int
-  , draws :: [Draw]
-  } deriving Show
+  { gameNum :: Int,
+    draws :: [Draw]
+  }
+  deriving (Show)
 
 -- Parsing
 parseRed :: Parser Color
@@ -90,7 +88,6 @@ power = M.foldr (*) 1
 main :: IO ()
 main = do
   input <- readFile "data/input.txt"
-  print $ parseInput input
   let (Right games) = parseInput input
   print $ sum $ gameNum <$> filter isGamePossible games
   print $ sum $ map (power . minCubes) games
