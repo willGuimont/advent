@@ -25,7 +25,7 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      DefaultMap
   other-modules:
       Paths_advent
   autogen-modules:
@@ -86,7 +86,6 @@ executable aoc-exe
       AoC2023.Day05
       AoC2023.Day06
       AoC2023.Day07
-      Common.DefaultMap
       Paths_advent
   autogen-modules:
       Paths_advent

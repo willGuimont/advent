@@ -1,6 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module Common.DefaultMap
+module DefaultMap
   ( DefaultMap,
     empty,
     singleton,

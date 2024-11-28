@@ -2,7 +2,7 @@ module AoC2023.Day04 (main) where
 
 import Control.Monad.Except
 import Data.Map qualified as M
-import Common.DefaultMap qualified as DM
+import DefaultMap qualified as DM
 import Text.ParserCombinators.Parsec
 
 -- Types
