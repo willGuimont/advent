@@ -1,6 +1,0 @@
-A to B = 1
-A to C = 1
-A to D = 1
-B to C = 1
-B to D = 1000
-C to D = 2000

@@ -1,0 +1,113 @@
+cabal-version: 2.2
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           advent
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/willGuimont/advent#readme>
+homepage:       https://github.com/willGuimont/advent#readme
+bug-reports:    https://github.com/willGuimont/advent/issues
+author:         William Guimont-Martin
+maintainer:     william.guimont-martin.1@ulaval.ca
+copyright:      William Guimont-Martin
+license:        BSD-3-Clause
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/willGuimont/advent
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_advent
+  autogen-modules:
+      Paths_advent
+  hs-source-dirs:
+      src
+  default-extensions:
+      ImportQualifiedPost
+      InstanceSigs
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unrecognised-pragmas
+  build-depends:
+      advent-of-code-api >=0.2.9.1
+    , array
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , cryptonite
+    , extra
+    , lens
+    , mtl
+    , parsec
+    , split
+    , text
+  default-language: Haskell2010
+
+executable aoc-exe
+  main-is: Main.hs
+  other-modules:
+      AoC2015.Day01
+      AoC2015.Day02
+      AoC2015.Day03
+      AoC2015.Day04
+      AoC2015.Day05
+      AoC2015.Day06
+      AoC2015.Day07
+      AoC2015.Day08
+      AoC2015.Day09
+      AoC2015.Day10
+      AoC2015.Day11
+      AoC2015.Day12
+      AoC2022.Day01
+      AoC2022.Day02
+      AoC2022.Day03
+      AoC2022.Day04
+      AoC2022.Day05
+      AoC2022.Day06
+      AoC2022.Day07
+      AoC2022.Day08
+      AoC2022.Day09
+      AoC2022.Day10
+      AoC2022.Day11
+      AoC2022.Day12
+      AoC2022.Day13
+      AoC2023.Day01
+      AoC2023.Day02
+      AoC2023.Day03
+      AoC2023.Day04
+      AoC2023.Day05
+      AoC2023.Day06
+      AoC2023.Day07
+      Common.DefaultMap
+      Paths_advent
+  autogen-modules:
+      Paths_advent
+  hs-source-dirs:
+      app
+  default-extensions:
+      ImportQualifiedPost
+      InstanceSigs
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unrecognised-pragmas -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      advent
+    , advent-of-code-api >=0.2.9.1
+    , array
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , cryptonite
+    , extra
+    , lens
+    , mtl
+    , parsec
+    , split
+    , text
+  default-language: Haskell2010
