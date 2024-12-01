@@ -19,7 +19,6 @@ extra-source-files:
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/willGuimont/advent#readme>
 
-resolver: lts-22.43
 dependencies:
 - base >= 4.7 && < 5
 - advent-of-code-api >= 0.2.9.1
