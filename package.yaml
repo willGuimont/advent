@@ -1,14 +1,14 @@
-name:                advent
-version:             0.1.0.0
-github:              "willGuimont/advent"
-license:             BSD-3-Clause
-author:              "William Guimont-Martin"
-maintainer:          "william.guimont-martin.1@ulaval.ca"
-copyright:           "William Guimont-Martin"
+name: advent
+version: 0.1.0.0
+github: "willGuimont/advent"
+license: BSD-3-Clause
+author: "William Guimont-Martin"
+maintainer: "william.guimont-martin.1@ulaval.ca"
+copyright: "William Guimont-Martin"
 
 extra-source-files:
-- README.md
-- CHANGELOG.md
+  - README.md
+  - CHANGELOG.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -17,49 +17,50 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/willGuimont/advent#readme>
+description: Please see the README on GitHub at <https://github.com/willGuimont/advent#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- advent-of-code-api >= 0.2.9.1
-- lens
-- parsec
-- containers
-- mtl
-- array
-- cryptonite
-- bytestring
-- split
-- extra
-- text
-- multiset
+  - base >= 4.7 && < 5
+  - advent-of-code-api >= 0.2.9.1
+  - lens
+  - parsec
+  - containers
+  - mtl
+  - array
+  - cryptonite
+  - bytestring
+  - split
+  - extra
+  - text
+  - multiset
+  - MissingH
 
 ghc-options:
-- -Wall
-- -Wcompat
-- -Widentities
-- -Wincomplete-record-updates
-- -Wincomplete-uni-patterns
-- -Wmissing-export-lists
-- -Wmissing-home-modules
-- -Wpartial-fields
-- -Wredundant-constraints
-- -Wno-unrecognised-pragmas
+  - -Wall
+  - -Wcompat
+  - -Widentities
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wmissing-export-lists
+  - -Wmissing-home-modules
+  - -Wpartial-fields
+  - -Wredundant-constraints
+  - -Wno-unrecognised-pragmas
 
 default-extensions:
-- ImportQualifiedPost
-- InstanceSigs
+  - ImportQualifiedPost
+  - InstanceSigs
 
 library:
   source-dirs: src
 
 executables:
   aoc-exe:
-    main-is:             Main.hs
-    source-dirs:         app
+    main: Main.hs
+    source-dirs: app
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - advent
+      - advent
