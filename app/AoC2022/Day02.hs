@@ -4,7 +4,6 @@ module AoC2022.Day02 (main) where
 
 import Control.Lens
 import Control.Monad.Except
-import Data.Either (fromRight)
 import Text.ParserCombinators.Parsec
 
 -- Types

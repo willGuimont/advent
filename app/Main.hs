@@ -3,7 +3,6 @@
 module Main where
 
 import System.Environment (getEnv)
-import Data.Text (pack)
 import Advent
 
 year :: Integer

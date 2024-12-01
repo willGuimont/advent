@@ -5,10 +5,9 @@ module AoC2022.Day07 (main) where
 import Control.Lens hiding (noneOf)
 import Control.Monad.Except (throwError)
 import qualified Control.Monad.State as S
-import Data.List (elemIndices, isPrefixOf, singleton, sort)
+import Data.List (elemIndices, isPrefixOf, singleton)
 import qualified Data.Map as M
 import Text.ParserCombinators.Parsec
-import Debug.Trace (trace)
 
 -- Types
 type FileName = String

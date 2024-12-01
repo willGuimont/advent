@@ -1,7 +1,6 @@
 module AoC2015.Day01 (main) where
 
 import Data.List (elemIndex)
-import Advent
 
 toLevelChange :: Char -> Int
 toLevelChange '(' = 1

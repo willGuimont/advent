@@ -2,7 +2,6 @@ module AoC2015.Day09 (main) where
 
 import Control.Lens
 import Control.Monad.Except (throwError)
-import qualified Control.Monad.State as S
 import Data.List (permutations, sortBy)
 import qualified Data.Map as M
 import Data.Maybe (fromJust)
@@ -23,12 +22,12 @@ type DistanceBetween = (LocationId, LocationId, Distance)
 -- Parsing
 parseDistanceBetween :: Parser DistanceBetweenName
 parseDistanceBetween = do
-  from <- many1 letter
+  fromName <- many1 letter
   _ <- string " to "
-  to <- many1 letter
+  toName <- many1 letter
   _ <- string " = "
   distance <- read <$> many1 digit
-  return (from, to, distance)
+  return (fromName, toName, distance)
 
 parseMap :: Parser [DistanceBetweenName]
 parseMap = parseDistanceBetween `sepBy` newline
@@ -55,14 +54,11 @@ toMapId xs =
 
 type Graph = [[Distance]]
 
-infinity :: Int
-infinity = 9999999
-
 makeGraph :: Int -> Graph
 makeGraph n = [[0 | _ <- [1 .. n]] | _ <- [1 .. n]]
 
 addEdge :: Graph -> DistanceBetween -> Graph
-addEdge g (from, to, dist) = set (ix from . ix to) dist . set (ix to . ix from) dist $ g
+addEdge g (fromName, toName, dist) = set (ix fromName . ix toName) dist . set (ix toName . ix fromName) dist $ g
 
 fstOf3 :: (a, b, c) -> a
 fstOf3 (x, _, _) = x
@@ -78,8 +74,8 @@ shortestPath g firstNode =
       [1 .. length g - 1]
   where
     findNextNode :: SS.Set Int -> Int -> Int
-    findNextNode alreadyVisited from =
-      let xs = sortBy (\x y -> compare (fst x) (fst y)) (zip (g !! from) [0 ..]) :: [(Distance, Int)]
+    findNextNode alreadyVisited fromNode =
+      let xs = sortBy (\x y -> compare (fst x) (fst y)) (zip (g !! fromNode) [0 ..]) :: [(Distance, Int)]
        in snd . head $ filter (\(dist, j) -> dist /= 0 && j `SS.notMember` alreadyVisited) xs
 
 getCostOfPath :: Graph -> [Int] -> Int

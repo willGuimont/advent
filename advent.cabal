@@ -46,6 +46,7 @@ library
     , extra
     , lens
     , mtl
+    , multiset
     , parsec
     , split
     , text
@@ -66,6 +67,15 @@ executable aoc-exe
       AoC2015.Day10
       AoC2015.Day11
       AoC2015.Day12
+      AoC2021.Day01
+      AoC2021.Day02
+      AoC2021.Day03
+      AoC2021.Day04
+      AoC2021.Day05
+      AoC2021.Day06
+      AoC2021.Day07
+      AoC2021.Day08
+      AoC2021.Day09
       AoC2022.Day01
       AoC2022.Day02
       AoC2022.Day03
@@ -106,6 +116,7 @@ executable aoc-exe
     , extra
     , lens
     , mtl
+    , multiset
     , parsec
     , split
     , text

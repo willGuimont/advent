@@ -2,7 +2,6 @@ module AoC2023.Day06 (main) where
 
 import Control.Monad.Except
 import Data.Functor ((<&>))
-import Debug.Trace (trace)
 import Text.ParserCombinators.Parsec
 
 -- Types

@@ -1,7 +1,6 @@
 module AoC2015.Day08 (main) where
 
 import Control.Monad.Except (throwError)
-import Data.Char (chr)
 import Text.ParserCombinators.Parsec
 
 -- Parsing
@@ -11,8 +10,8 @@ parseEscapedQuote = string "\\\"" >> return '"'
 parseHex :: Parser Char
 parseHex = do
   _ <- string "\\x"
-  x <- anyChar
-  y <- anyChar
+  _ <- anyChar
+  _ <- anyChar
   return ' '
 
 parseEscapedEscape :: Parser Char

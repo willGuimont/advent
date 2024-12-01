@@ -26,7 +26,7 @@ makeGraph :: Int -> Graph
 makeGraph n = [[if x == y then 0 else infinity | x <- [1 .. n]] | y <- [1 .. n]]
 
 addEdge :: Graph -> DistanceBetween -> Graph
-addEdge g (from, to, dist) = set (ix from . ix to) dist g
+addEdge g (fromNode, toNode, dist) = set (ix fromNode . ix toNode) dist g
 
 toHeight :: Char -> Int
 toHeight c = ord c - ord 'a'

@@ -33,6 +33,7 @@ dependencies:
 - split
 - extra
 - text
+- multiset
 
 ghc-options:
 - -Wall

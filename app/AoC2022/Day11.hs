@@ -60,11 +60,11 @@ parseOperationExpr = parseOldExpr <|> parseScalarExpr
 parseOperation :: Parser Operation
 parseOperation = do
   expr1 <- parseOperationExpr
-  char ' '
-  op <- anyChar
-  char ' '
+  _ <- char ' '
+  operator <- anyChar
+  _ <- char ' '
   expr2 <- parseOperationExpr
-  return $ if op == '*' then OperationMult expr1 expr2 else OperationAdd expr1 expr2
+  return $ if operator == '*' then OperationMult expr1 expr2 else OperationAdd expr1 expr2
 
 parseMonkey :: Parser Monkey
 parseMonkey = do
