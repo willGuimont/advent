@@ -42,9 +42,9 @@ main = do
     _ <- partOne example
     _ <- partTwo example
 
-    -- let input' = unpack input
-    -- putStrLn "Real input"
-    -- _ <- partOne input'
-    -- _ <- partTwo input'
+    let input' = unpack input
+    putStrLn "Real input"
+    _ <- partOne input'
+    _ <- partTwo input'
 
     return ()

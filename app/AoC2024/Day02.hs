@@ -1,7 +1,6 @@
 module AoC2024.Day02 (partOne, partTwo) where
 
 import Text.ParserCombinators.Parsec
-import Data.List (zipWith3)
 
 -- Parsing
 parseLevel :: Parser Int
@@ -23,17 +22,16 @@ boolToInt :: Bool -> Int
 boolToInt False = 0
 boolToInt True = 1
 
-allButOne :: [Bool] -> Bool
-allButOne bs = n - 1 == sum (boolToInt <$> bs)
-  where
-    n = length bs
+countTrue :: [Bool] -> Int
+countTrue = sum . fmap boolToInt
 
-safeButOne :: [Bool] -> [Bool] -> [Bool] -> Bool
-safeButOne small pos neg = allButOne pos' || allButOne neg'
+computeDelta :: [Int] -> [Int]
+computeDelta x = zipWith (-) x (tail x)
+
+isSafe :: [Int] -> Bool
+isSafe xs = all (\x -> 1 <= x && x <= 3) delta || all (\x -> -3 <= x && x <= -1) delta
   where
-    pos' = zipWith (&&) small pos
-    neg' = zipWith (&&) small neg
-    
+    delta = computeDelta xs
 
 -- Parts
 partOne :: String -> IO ()
@@ -41,24 +39,14 @@ partOne input = do
   putStrLn "Part One"
 
   let (Right xs) = parseInput $ init input
-  let delta = (\x -> zipWith (-) x (tail x)) <$> xs
-  let positive = all (> 0) <$> delta
-  let negative = all (< 0) <$> delta
-  let smallChange = all ((<= 3) . abs) <$> delta
-  let safe = zipWith3 (\x y z -> x && (y || z)) smallChange positive negative
-  print . sum $ boolToInt <$> safe
-    
+  print . countTrue $ isSafe <$> xs
+
 
 partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "Part Two"
 
-  let (Right xs) = parseInput $ init input
-  let delta = (\x -> zipWith (-) x (tail x)) <$> xs
-  let positive = fmap (> 0) <$> delta
-  let negative = fmap (< 0) <$> delta
-  let smallChange = fmap ((<= 3) . abs) <$> delta
-  let safeDampened = zipWith3 safeButOne smallChange positive negative
-  print safeDampened
-  print . sum $ boolToInt <$> safeDampened
+  -- let (Right xs) = parseInput $ init input
+  -- let result =  isSafe <$> xs
+  -- print . countTrue $ result
 
