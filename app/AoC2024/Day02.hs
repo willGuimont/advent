@@ -33,6 +33,9 @@ isSafe xs = all (\x -> 1 <= x && x <= 3) delta || all (\x -> -3 <= x && x <= -1)
   where
     delta = computeDelta xs
 
+removeOne :: [a] -> [[a]]
+removeOne xs = [take i xs ++ drop (i + 1) xs | i <- [0 .. length xs - 1]]
+
 -- Parts
 partOne :: String -> IO ()
 partOne input = do
@@ -46,7 +49,10 @@ partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "Part Two"
 
-  -- let (Right xs) = parseInput $ init input
-  -- let result =  isSafe <$> xs
-  -- print . countTrue $ result
+  let (Right xs) = parseInput $ init input
+  let safeReports = isSafe <$> xs
+  let subReports = removeOne <$> xs
+  let safeSubReports = any isSafe <$> subReports
+  let result =  zipWith (||) safeReports safeSubReports
+  print . countTrue $ result
 
