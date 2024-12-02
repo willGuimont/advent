@@ -34,6 +34,7 @@ partOne input = do
 
 partTwo :: String -> IO ()
 partTwo input = do
+  putStrLn "Part Two"
   let (Right [xs, ys]) = fmap L.transpose <$> parseInput $ init input
   let result = sum ((uncurry (*) <$> fmap (`countElem` ys)) . dup <$> xs)
   print result

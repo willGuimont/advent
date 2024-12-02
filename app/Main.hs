@@ -6,12 +6,24 @@ import System.Environment (getEnv)
 import Data.Text (unpack)
 import Advent
 
-import AoC2024.Day01
+import AoC2024.Day02
 
+-- Changes daily
 year :: Integer
 year = 2024
 
--- Session from .env file
+day :: Integer
+day = 2
+
+example :: String
+example = "7 6 4 2 1\n\
+\1 2 7 8 9\n\
+\9 7 6 2 1\n\
+\1 3 2 4 5\n\
+\8 6 4 4 1\n\
+\1 3 6 7 9\n"
+
+-- AoC wrapper
 getSession :: IO String
 getSession = getEnv "AOC_TOKEN"
 
@@ -22,25 +34,17 @@ adventOptions :: IO AoCOpts
 adventOptions = do
     defaultAoCOpts userAgent year <$> getSession
 
-example :: String
-example = "3   4\n\
-\4   3\n\
-\2   5\n\
-\1   3\n\
-\3   9\n\
-\3   3\n"
-
 main :: IO ()
 main = do
     opt <- adventOptions
-    (Right input) <- runAoC opt $ AoCInput (mkDay_ 1)
+    (Right input) <- runAoC opt $ AoCInput (mkDay_ day)
     putStrLn "Example"
     _ <- partOne example
     _ <- partTwo example
 
-    let input' = unpack input
-    putStrLn "Real input"
-    _ <- partOne input'
-    _ <- partTwo input'
+    -- let input' = unpack input
+    -- putStrLn "Real input"
+    -- _ <- partOne input'
+    -- _ <- partTwo input'
 
     return ()
