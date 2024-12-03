@@ -6,22 +6,17 @@ import System.Environment (getEnv)
 import Data.Text (unpack)
 import Advent
 
-import AoC2024.Day02
+import AoC2024.Day03
 
 -- Changes daily
 year :: Integer
 year = 2024
 
 day :: Integer
-day = 2
+day = 3
 
 example :: String
-example = "7 6 4 2 1\n\
-\1 2 7 8 9\n\
-\9 7 6 2 1\n\
-\1 3 2 4 5\n\
-\8 6 4 4 1\n\
-\1 3 6 7 9\n"
+example = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
 
 -- AoC wrapper
 getSession :: IO String
@@ -38,12 +33,12 @@ main :: IO ()
 main = do
     opt <- adventOptions
     (Right input) <- runAoC opt $ AoCInput (mkDay_ day)
-    putStrLn "Example"
+    putStrLn "### Example ###"
     _ <- partOne example
     _ <- partTwo example
 
     let input' = unpack input
-    putStrLn "Real input"
+    putStrLn "### Real input ###"
     _ <- partOne input'
     _ <- partTwo input'
 
