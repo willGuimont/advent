@@ -6,17 +6,26 @@ import System.Environment (getEnv)
 import Data.Text (unpack)
 import Advent
 
-import AoC2024.Day03
+import AoC2024.Day04
 
 -- Changes daily
 year :: Integer
 year = 2024
 
 day :: Integer
-day = 3
+day = 4
 
 example :: String
-example = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
+example = "MMMSXXMASM\n\
+\MSAMXMSMSA\n\
+\AMXSXMAAMM\n\
+\MSAMASMSMX\n\
+\XMASAMXAMM\n\
+\XXAMMXXAMA\n\
+\SMSMSASXSS\n\
+\SAXAMASAAA\n\
+\MAMMMXMMMM\n\
+\MXMXAXMASX\n"
 
 -- AoC wrapper
 getSession :: IO String
@@ -43,3 +52,4 @@ main = do
     _ <- partTwo input'
 
     return ()
+
