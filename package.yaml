@@ -35,6 +35,8 @@ dependencies:
   - multiset
   - MissingH
   - relude
+  - async
+  - parallel
 
 ghc-options:
   - -Wall
@@ -61,6 +63,7 @@ executables:
     source-dirs: app
     ghc-options:
       - -threaded
+      - -O2
       - -rtsopts
       - -with-rtsopts=-N
     dependencies:

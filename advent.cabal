@@ -40,6 +40,7 @@ library
       MissingH
     , advent-of-code-api >=0.2.9.1
     , array
+    , async
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -48,6 +49,7 @@ library
     , lens
     , mtl
     , multiset
+    , parallel
     , parsec
     , relude
     , split
@@ -103,6 +105,7 @@ executable aoc-exe
       AoC2024.Day03
       AoC2024.Day04
       AoC2024.Day05
+      AoC2024.Day06
       Paths_advent
   autogen-modules:
       Paths_advent
@@ -111,12 +114,13 @@ executable aoc-exe
   default-extensions:
       ImportQualifiedPost
       InstanceSigs
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unrecognised-pragmas -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -Wno-unrecognised-pragmas -threaded -O2 -rtsopts -with-rtsopts=-N
   build-depends:
       MissingH
     , advent
     , advent-of-code-api >=0.2.9.1
     , array
+    , async
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -125,6 +129,7 @@ executable aoc-exe
     , lens
     , mtl
     , multiset
+    , parallel
     , parsec
     , relude
     , split
