@@ -43,7 +43,7 @@ example = "47|53\n\
 \75,29,13\n\
 \75,97,47,61,53\n\
 \61,13,29\n\
-\97,13,75,29,47"
+\97,13,75,29,47\n"
 
 -- AoC wrapper
 getSession :: IO String
@@ -64,10 +64,10 @@ main = do
     _ <- partOne example
     _ <- partTwo example
 
-    -- let input' = unpack input
-    -- putStrLn "### Real input ###"
-    -- _ <- partOne input'
-    -- _ <- partTwo input'
+    let input' = unpack input
+    putStrLn "### Real input ###"
+    _ <- partOne input'
+    _ <- partTwo input'
 
     return ()
 

@@ -2,18 +2,19 @@ module AoC2024.Day05 (partOne, partTwo) where
 
 import Text.ParserCombinators.Parsec
 import Text.Parsec (endOfLine)
+import Data.List (sortBy)
 
 -- Types
-type Order = (Int, Int)
+type Rule = (Int, Int)
 type Update = [Int]
-type PrinterProgram = ([Order], [Update])
+type PrinterProgram = ([Rule], [Update])
 
 -- Parsing
 number :: Parser Int
 number = read <$> many1 digit
 
-ordering :: Parser Order
-ordering = do
+rule :: Parser Rule
+rule = do
   x <- number
   _ <- char '|'
   y <- number
@@ -24,7 +25,7 @@ updates = number `sepBy` char ','
 
 printerProgram :: Parser PrinterProgram
 printerProgram = do
-  os <- try ordering `endBy` endOfLine
+  os <- try rule `endBy` endOfLine
   _ <- newline
   us <- updates `sepBy` newline
   return (os, us)
@@ -35,17 +36,33 @@ parseInput s = case parse printerProgram "printer" s of
   Right res -> Right res
 
 -- Logic
+sortByRules :: [Rule] -> Update -> Update
+sortByRules rs = sortBy f
+  where
+    f x y = if (x, y) `elem` rs then LT else GT
+
+isSorted :: [Rule] -> Update -> Bool
+isSorted rs us = us == sortByRules rs us
+
+middlePage :: Update -> Int
+middlePage us = us !! n
+  where
+    n = length us `div` 2
 
 -- Parts
 partOne :: String -> IO ()
 partOne input = do
   putStrLn "- Part One -"
 
-  let (Right (os, us)) = parseInput input
-  print os
-  print us
+  let (Right (rs, us)) = parseInput $ init input
+  let correct = filter (isSorted rs) us
+  print . sum $ middlePage <$> correct
 
 partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "- Part Two -"
+
+  let (Right (rs, us)) = parseInput $ init input
+  let incorrect = filter (not . isSorted rs) us
+  print . sum $ middlePage . sortByRules rs <$> incorrect
 
