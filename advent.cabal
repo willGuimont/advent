@@ -106,6 +106,7 @@ executable aoc-exe
       AoC2024.Day04
       AoC2024.Day05
       AoC2024.Day06
+      AoC2024.Day07
       Paths_advent
   autogen-modules:
       Paths_advent
