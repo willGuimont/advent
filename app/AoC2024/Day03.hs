@@ -51,11 +51,11 @@ applyDoDont :: Program -> Program
 applyDoDont = loop [] True . filter (/= Invalid)
   where
     loop c _ [] = c
-    loop c _ (Dont:xs) = loop c False xs
-    loop c _ (Do:xs) = loop c True xs
-    loop c e (x:xs) = loop c' e xs
+    loop c _ (Dont : xs) = loop c False xs
+    loop c _ (Do : xs) = loop c True xs
+    loop c e (x : xs) = loop c' e xs
       where
-        c' = if e then x:c else c
+        c' = if e then x : c else c
 
 -- Parts
 partOne :: String -> IO ()
@@ -73,4 +73,3 @@ partTwo input = do
   let (Right xs) = parseInput $ init input
   let result = sum $ interpretExpression <$> applyDoDont xs
   print result
-

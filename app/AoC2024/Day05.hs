@@ -1,12 +1,14 @@
 module AoC2024.Day05 (partOne, partTwo) where
 
-import Text.ParserCombinators.Parsec
-import Text.Parsec (endOfLine)
 import Data.List (sortBy)
+import Text.Parsec (endOfLine)
+import Text.ParserCombinators.Parsec
 
 -- Types
 type Rule = (Int, Int)
+
 type Update = [Int]
+
 type PrinterProgram = ([Rule], [Update])
 
 -- Parsing
@@ -65,4 +67,3 @@ partTwo input = do
   let (Right (rs, us)) = parseInput $ init input
   let incorrect = filter (not . isSorted rs) us
   print . sum $ middlePage . sortByRules rs <$> incorrect
-

@@ -37,6 +37,7 @@ dependencies:
   - relude
   - async
   - parallel
+  - safe
 
 ghc-options:
   - -Wall

@@ -1,9 +1,9 @@
 module AoC2024.Day01 (partOne, partTwo) where
 
-import Text.ParserCombinators.Parsec
-import qualified Data.List as L
+import Data.List qualified as L
 import Data.List.Utils
 import Data.Tuple.Utils
+import Text.ParserCombinators.Parsec
 
 -- Parsing
 parseInt :: Parser Int
@@ -38,4 +38,3 @@ partTwo input = do
   let (Right [xs, ys]) = fmap L.transpose <$> parseInput $ init input
   let result = sum ((uncurry (*) <$> fmap (`countElem` ys)) . dup <$> xs)
   print result
-

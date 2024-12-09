@@ -1,13 +1,16 @@
 module AoC2024.Day06 (partOne, partTwo) where
 
-import Text.ParserCombinators.Parsec
-import Data.List.Utils (uniq)
 import Control.Parallel.Strategies (parMap, rdeepseq)
+import Data.List.Utils (uniq)
+import Data.Set qualified as S
+import Text.ParserCombinators.Parsec
 
 -- Types
 data Tile = Empty | Obstacle deriving (Eq)
-data Direction = North | South | East | West deriving (Eq, Show)
-data Guard = Guard (Int, Int) Direction deriving (Eq, Show)
+
+data Direction = North | South | East | West deriving (Eq, Show, Ord)
+
+data Guard = Guard (Int, Int) Direction deriving (Eq, Show, Ord)
 
 instance Show Tile where
   show Empty = "."
@@ -36,15 +39,14 @@ parseInput s = case parse tileMap "map" s of
 
 -- Logic
 (!?) :: [a] -> Int -> Maybe a
-[]     !? _ = Nothing
-(x:_)  !? 0 = Just x
-(_:xs) !? i = xs !? (i - 1)
+[] !? _ = Nothing
+(x : _) !? 0 = Just x
+(_ : xs) !? i = xs !? (i - 1)
 
 findCharsCoords :: [Char] -> [String] -> [(Int, Int)]
 findCharsCoords cs grid =
-  [ (rowIdx, colIdx) | (rowIdx, row) <- zip [0..] grid
-  , (colIdx, c) <- zip [0..] row
-  , c `elem` cs]
+  [ (rowIdx, colIdx) | (rowIdx, row) <- zip [0 ..] grid, (colIdx, c) <- zip [0 ..] row, c `elem` cs
+  ]
 
 getDirection :: Char -> Direction
 getDirection '^' = North
@@ -82,33 +84,33 @@ outOfBound ts (Guard (x, y) _) = x < 0 || x >= nx || y < 0 || y >= ny
 
 generateGrids :: Guard -> [[Tile]] -> [(Int, Int)] -> [[[Tile]]]
 generateGrids (Guard pos _) grid posToChange =
-    [ replaceAt2D grid (r, c) Obstacle
-    | (r, c) <- posToChange
-    , (r, c) /= pos
-    ]
+  [ replaceAt2D grid (r, c) Obstacle
+    | (r, c) <- posToChange,
+      (r, c) /= pos
+  ]
 
 replaceAt2D :: [[Tile]] -> (Int, Int) -> Tile -> [[Tile]]
 replaceAt2D grid (rowIndex, colIndex) newTile =
-    [ if r == rowIndex
+  [ if r == rowIndex
       then replaceAt row colIndex newTile
       else row
-    | (r, row) <- zip [0..] grid
-    ]
+    | (r, row) <- zip [0 ..] grid
+  ]
 
 replaceAt :: [Tile] -> Int -> Tile -> [Tile]
 replaceAt row colIndex newTile =
-    [ if c == colIndex then newTile else tile
-    | (c, tile) <- zip [0..] row
-    ]
+  [ if c == colIndex then newTile else tile
+    | (c, tile) <- zip [0 ..] row
+  ]
 
-hasLooped :: [Guard] -> Guard -> Bool
-hasLooped states g = g `elem` states
+hasLooped :: S.Set Guard -> Guard -> Bool
+hasLooped states g = g `S.member` states
 
-hasLoop :: [Guard] -> Guard -> [[Tile]] -> Bool
+hasLoop :: S.Set Guard -> Guard -> [[Tile]] -> Bool
 hasLoop gs g ts
   | hasExited = False
   | inLoop = True
-  | otherwise = hasLoop (g:gs) g' ts
+  | otherwise = hasLoop (S.insert g gs) g' ts
   where
     hasExited = outOfBound ts g
     inLoop = hasLooped gs g
@@ -142,6 +144,5 @@ partTwo input = do
   let posToChange = uniq $ (\(Guard p _) -> p) <$> guards
 
   let grids = generateGrids g ts posToChange
-  let results = parMap rdeepseq (hasLoop [] g) grids
+  let results = parMap rdeepseq (hasLoop S.empty g) grids
   print . length $ filter id results
-

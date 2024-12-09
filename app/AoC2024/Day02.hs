@@ -44,7 +44,6 @@ partOne input = do
   let (Right xs) = parseInput $ init input
   print . countTrue $ isSafe <$> xs
 
-
 partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "Part Two"
@@ -53,6 +52,5 @@ partTwo input = do
   let safeReports = isSafe <$> xs
   let subReports = removeOne <$> xs
   let safeSubReports = any isSafe <$> subReports
-  let result =  zipWith (||) safeReports safeSubReports
+  let result = zipWith (||) safeReports safeSubReports
   print . countTrue $ result
-

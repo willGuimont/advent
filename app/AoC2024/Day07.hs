@@ -32,8 +32,8 @@ cartesianPower xs n = [x : ys | x <- xs, ys <- cartesianPower xs (n - 1)]
 applyEq :: [Int -> Int -> Int] -> [Int] -> Int
 applyEq _ [] = 0
 applyEq _ [n] = n
-applyEq (op:ops) (x:y:xs) = applyEq ops (x `op` y : xs)
-applyEq _ (x:_) = x
+applyEq (op : ops) (x : y : xs) = applyEq ops (x `op` y : xs)
+applyEq _ (x : _) = x
 
 isValid :: [Int -> Int -> Int] -> Equation -> Bool
 isValid ops (Equation test ns) = any (\ops -> test == applyEq ops ns) opss
@@ -64,4 +64,3 @@ partTwo input = do
   let (Right eqs) = parseInput $ init input
   let result = sum $ getTest <$> filter (isValid [(+), (*), concatOp]) eqs
   print result
-

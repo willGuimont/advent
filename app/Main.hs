@@ -6,28 +6,17 @@ import System.Environment (getEnv)
 import Data.Text (unpack)
 import Advent
 
-import AoC2024.Day08
+import AoC2024.Day09
 
 -- Changes daily
 year :: Integer
 year = 2024
 
 day :: Integer
-day = 8
+day = 9
 
 example :: String
-example = "............\n\
-\........0...\n\
-\.....0......\n\
-\.......0....\n\
-\....0.......\n\
-\......A.....\n\
-\............\n\
-\............\n\
-\........A...\n\
-\.........A..\n\
-\............\n\
-\............\n"
+example = "2333133121414131402\n"
 
 -- AoC wrapper
 getSession :: IO String

@@ -1,9 +1,9 @@
 module AoC2024.Day08 (partOne, partTwo) where
 
-import Text.ParserCombinators.Parsec
 import Data.Functor ((<&>))
 import Data.List.Utils (uniq)
 import Data.Ratio
+import Text.ParserCombinators.Parsec
 
 -- Types
 data Tile = Empty | Antenna Char deriving (Eq)
@@ -35,7 +35,7 @@ uniqAntenna :: [[Tile]] -> [Tile]
 uniqAntenna = filter (/= Empty) . uniq . concat
 
 antennaPositions :: [[Tile]] -> Tile -> [(Int, Int)]
-antennaPositions ts t = [(x, y) | (x, r) <- zip [0..] ts, (y, c) <- zip [0..] r, c == t]
+antennaPositions ts t = [(x, y) | (x, r) <- zip [0 ..] ts, (y, c) <- zip [0 ..] r, c == t]
 
 dimensions :: [[Tile]] -> (Int, Int)
 dimensions ts = (length ts, length $ head ts)
@@ -57,7 +57,7 @@ integerPositionInLine ts p1@(x1, y1) p2@(x2, y2)
     dy = y2 - y1
     m = dy % dx
     (dx', dy') = (denominator m, numerator m)
-    rangeN = [-maxN..maxN]
+    rangeN = [-maxN .. maxN]
     positions = [(x1 + n * dx', y1 + n * dy') | n <- rangeN]
 
 cartesian :: [a] -> [b] -> [(a, b)]
@@ -88,7 +88,6 @@ partOne input = do
 
   print . length . uniq $ concat antis
 
-
 partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "- Part Two -"
@@ -100,4 +99,3 @@ partTwo input = do
   let antis = [integerPositionInLine ts p1 p2 | ps <- antennaPairs, (p1, p2) <- ps]
 
   print . length . uniq $ concat antis
-

@@ -52,6 +52,7 @@ library
     , parallel
     , parsec
     , relude
+    , safe
     , split
     , text
   default-language: Haskell2010
@@ -108,6 +109,7 @@ executable aoc-exe
       AoC2024.Day06
       AoC2024.Day07
       AoC2024.Day08
+      AoC2024.Day09
       Paths_advent
   autogen-modules:
       Paths_advent
@@ -134,6 +136,7 @@ executable aoc-exe
     , parallel
     , parsec
     , relude
+    , safe
     , split
     , text
   default-language: Haskell2010
