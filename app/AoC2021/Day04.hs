@@ -1,8 +1,8 @@
 module AoC2021.Day04 where
 
 import Control.Monad.Except
-import qualified Control.Monad.State as S
-import qualified Data.List as L
+import Control.Monad.State qualified as S
+import Data.List qualified as L
 import Text.ParserCombinators.Parsec
 
 -- Types

@@ -1,6 +1,6 @@
 module AoC2021.Day03 where
 
-import qualified Data.List as L
+import Data.List qualified as L
 
 data Bit = Zero | One deriving (Show, Eq)
 

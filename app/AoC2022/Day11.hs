@@ -4,10 +4,11 @@ module AoC2022.Day11 (main) where
 
 import Control.Lens
 import Control.Monad.Except (throwError)
-import Data.List (sort)
-import qualified Data.Map as M
+import Data.List (sort, sortBy)
+import Data.Map qualified as M
 import Data.Maybe (fromJust)
 import Text.ParserCombinators.Parsec
+import Data.Ord (Down(Down), comparing)
 
 -- Types
 type Item = Integer
@@ -157,7 +158,7 @@ main = do
       initNumInspect = foldl (\m i -> M.insert i 0 m) M.empty mIds
       world = World monkeysMap initNumInspect
       endState = iterate stepRound world !! 20
-      getMonkeyBusiness = product . take 2 . reverse . sort . fmap snd . M.toList . view numInspect
+      getMonkeyBusiness = product . take 2 . sortBy (comparing Down) . fmap snd . M.toList . view numInspect
   print $ getMonkeyBusiness endState
 
   let n = foldl1 lcm $ view testDivisor <$> monkeys

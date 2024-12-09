@@ -1,9 +1,9 @@
 module AoC2021.Day07 where
 
-import qualified Data.List as L
+import Data.List qualified as L
 import Data.List.Split
 
-median :: Ord a => [a] -> a
+median :: (Ord a) => [a] -> a
 median input = L.sort input !! (length input `div` 2)
 
 part1 :: [Int] -> Int

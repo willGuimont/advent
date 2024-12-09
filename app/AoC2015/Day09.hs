@@ -3,9 +3,9 @@ module AoC2015.Day09 (main) where
 import Control.Lens
 import Control.Monad.Except (throwError)
 import Data.List (permutations, sortBy)
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Maybe (fromJust)
-import qualified Data.Set as SS
+import Data.Set qualified as SS
 import Text.ParserCombinators.Parsec
 
 -- Types

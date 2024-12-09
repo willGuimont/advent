@@ -22,7 +22,7 @@ where
 
 import Control.Lens
 import Data.List (nub)
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Maybe
 import Prelude hiding (lookup, null)
 
@@ -56,7 +56,7 @@ instance Foldable (DefaultMap k) where
     where
       m' = m ^. defMap
 
-instance Ord k => Traversable (DefaultMap k) where
+instance (Ord k) => Traversable (DefaultMap k) where
   traverse f m = fromList <$> def <*> list
     where
       bs = traverse f $ snd <$> toList m
@@ -73,35 +73,35 @@ empty def = DefMap def M.empty
 singleton :: v -> k -> v -> DefaultMap k v
 singleton def k v = DefMap def $ M.singleton k v
 
-fromList :: Ord k => v -> [(k, v)] -> DefaultMap k v
+fromList :: (Ord k) => v -> [(k, v)] -> DefaultMap k v
 fromList def xs = DefMap def $ M.fromList xs
 
 -- Insertion
-insert :: Ord k => k -> v -> DefaultMap k v -> DefaultMap k v
+insert :: (Ord k) => k -> v -> DefaultMap k v -> DefaultMap k v
 insert k x = mapOnMap (M.insert k x)
 
 -- Deletion/Update
-adjust :: Ord k => (v -> v) -> k -> DefaultMap k v -> DefaultMap k v
+adjust :: (Ord k) => (v -> v) -> k -> DefaultMap k v -> DefaultMap k v
 adjust f = adjustWithKey (\_ y -> f y)
 
 adjustWithKey ::
-  Ord k => (k -> v -> v) -> k -> DefaultMap k v -> DefaultMap k v
+  (Ord k) => (k -> v -> v) -> k -> DefaultMap k v -> DefaultMap k v
 adjustWithKey f k m = (insert k $ f k $ lookup k m) m
 
-delete :: Ord k => k -> DefaultMap k v -> DefaultMap k v
+delete :: (Ord k) => k -> DefaultMap k v -> DefaultMap k v
 delete k = mapOnMap (M.delete k)
 
 -- Query
 lookup :: (Ord k) => k -> DefaultMap k v -> v
 lookup k m = fromMaybe (m ^. defDefault) $ M.lookup k (m ^. defMap)
 
-(!) :: Ord k => DefaultMap k v -> k -> v
+(!) :: (Ord k) => DefaultMap k v -> k -> v
 m ! k = lookup k m
 
-member :: Ord k => k -> DefaultMap k v -> Bool
+member :: (Ord k) => k -> DefaultMap k v -> Bool
 member k = M.member k . view defMap
 
-notMember :: Ord k => k -> DefaultMap k v -> Bool
+notMember :: (Ord k) => k -> DefaultMap k v -> Bool
 notMember k = M.notMember k . view defMap
 
 null :: DefaultMap k v -> Bool

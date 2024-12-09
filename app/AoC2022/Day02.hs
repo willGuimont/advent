@@ -94,7 +94,7 @@ parseInput :: String -> Either String Tournament
 parseInput input = case parse parseTournament "tournament" input of
   Left err -> throwError $ show err
   Right x -> return x
-  
+
 parseTournamentOutcome :: Parser Tournament
 parseTournamentOutcome = (parseRoundOutcome `sepEndBy` newline) <&> Tournament
 

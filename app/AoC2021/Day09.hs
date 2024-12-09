@@ -18,4 +18,4 @@ main = do
    in do
         print $ [getAt i j | i <- [0 .. width - 1], j <- [0 .. height - 1]]
         print $ sum $ map ((+ 1) . uncurry getAt) lowPoint
-        print $ lowPoint
+        print lowPoint

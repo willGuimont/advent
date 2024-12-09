@@ -35,7 +35,7 @@ parseInput s = case parse (parsePacketPair `sepBy` newline) "packets" s of
   Right x -> return x
 
 -- Logic
-compareList :: Ord a => [a] -> [a] -> Ordering
+compareList :: (Ord a) => [a] -> [a] -> Ordering
 compareList [] [] = EQ
 compareList [] (_ : _) = LT
 compareList (_ : _) [] = GT

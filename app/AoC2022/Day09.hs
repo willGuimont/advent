@@ -4,7 +4,7 @@ module AoC2022.Day09 (main) where
 
 import Control.Lens
 import Control.Monad.Except (throwError)
-import qualified Data.Set as S
+import Data.Set qualified as S
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -90,8 +90,8 @@ toSymbol c = show $ c - 1
 printWorld :: World -> IO ()
 printWorld w = do
   let grid = [[0 | _ <- [0 .. 50]] | _ <- [0 .. 20]]
-  let grid' = foldl (\g (x, y) -> set (ix (- y + 10) . ix (x + 25)) 100 g) grid (view visitedPos w)
-  let grid'' = fst $ foldl (\(g, i) (x, y) -> (set (ix (- y + 10) . ix (x + 25)) i g, i + 1)) (grid', 1) (view positions w)
+  let grid' = foldl (\g (x, y) -> set (ix (-y + 10) . ix (x + 25)) 100 g) grid (view visitedPos w)
+  let grid'' = fst $ foldl (\(g, i) (x, y) -> (set (ix (-y + 10) . ix (x + 25)) i g, i + 1)) (grid', 1) (view positions w)
   mapM_ (putStrLn . concatMap toSymbol) grid''
 
 main :: IO ()

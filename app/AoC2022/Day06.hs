@@ -3,7 +3,7 @@ module AoC2022.Day06 (main) where
 import Data.List (elemIndex, nub, tails)
 import Data.Maybe (fromJust)
 
-allDifferent :: Eq a => [a] -> Bool
+allDifferent :: (Eq a) => [a] -> Bool
 allDifferent xs = length xs == length (nub xs)
 
 window :: Int -> [a] -> [[a]]

@@ -1,7 +1,8 @@
 module AoC2022.Day01 (main) where
 
-import qualified Data.List as L
+import Data.List (sortBy)
 import Data.List.Split
+import Data.Ord (Down (Down), comparing)
 
 main :: IO ()
 main = do
@@ -9,4 +10,4 @@ main = do
   let xs = lines input
   let by_elf = (sum . fmap read <$> splitOn [""] xs) :: [Int]
   print . maximum $ by_elf
-  print . sum . take 3 . reverse . L.sort $ by_elf
+  print . sum . take 3 . sortBy (comparing Down) $ by_elf

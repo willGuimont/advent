@@ -6,7 +6,7 @@ import Control.Arrow ((***))
 import Control.Monad (join)
 import Data.Char (toUpper)
 import Data.List.Split (splitOn)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 
 -- Types
 data Segment = A | B | C | D | E | F | G deriving (Show, Read, Eq, Ord)
@@ -41,7 +41,7 @@ solve patterns = (a, b, c, d, e, f, g)
     getOfSize s = filter ((== s) . Set.size)
 
     withoutLetters :: [Segment] -> [Set.Set Segment] -> [Set.Set Segment]
-    withoutLetters xs lst = map (`Set.difference` Set.fromList xs) lst
+    withoutLetters xs = map (`Set.difference` Set.fromList xs)
 
     getSingleton = head . Set.toList
 
@@ -64,17 +64,17 @@ solve patterns = (a, b, c, d, e, f, g)
 toDigit :: Config -> Set.Set Segment -> Int
 toDigit (a, b, c, d, e, f, g) s =
   if
-      | s == zero -> 0
-      | s == one -> 1
-      | s == two -> 2
-      | s == three -> 3
-      | s == four -> 4
-      | s == five -> 5
-      | s == six -> 6
-      | s == seven -> 7
-      | s == eight -> 8
-      | s == nine -> 9
-      | otherwise -> 0
+    | s == zero -> 0
+    | s == one -> 1
+    | s == two -> 2
+    | s == three -> 3
+    | s == four -> 4
+    | s == five -> 5
+    | s == six -> 6
+    | s == seven -> 7
+    | s == eight -> 8
+    | s == nine -> 9
+    | otherwise -> 0
   where
     zero = Set.fromList [a, b, c, e, f, g]
     one = Set.fromList [c, f]

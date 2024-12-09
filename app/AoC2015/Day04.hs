@@ -1,7 +1,7 @@
 module AoC2015.Day04 (main) where
 
 import Crypto.Hash
-import qualified Data.ByteString.Lazy as BSL
+import Data.ByteString.Lazy qualified as BSL
 import Data.String (fromString)
 
 mineHash :: Int -> BSL.ByteString -> BSL.ByteString -> Int

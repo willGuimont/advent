@@ -3,9 +3,9 @@ module AoC2021.Day05 where
 import Control.Lens
 import Control.Monad
 import Control.Monad.Except
-import qualified Control.Monad.State as S
+import Control.Monad.State qualified as S
 import Data.Either (fromRight)
-import qualified Data.List as L
+import Data.List qualified as L
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -110,10 +110,10 @@ main = do
    in do
         putStrLn "Part 1"
         putStrLn $ showWorldMap noDiagResult
-        print $ length $ filter (> 1) $ concat noDiagResult
+        print $ length $ concatMap (filter (> 1)) noDiagResult
         putStr "\n"
-        
+
         putStrLn "Part 2"
         putStrLn $ showWorldMap result
-        print $ length $ filter (> 1) $ concat result
+        print $ length $ concatMap (filter (> 1)) result
         putStr "\n"

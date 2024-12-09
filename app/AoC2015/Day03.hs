@@ -1,8 +1,8 @@
 module AoC2015.Day03 (main) where
 
 import Control.Monad.Except (throwError)
-import qualified Control.Monad.State as S
-import qualified Data.Map as M
+import Control.Monad.State qualified as S
+import Data.Map qualified as M
 import Text.ParserCombinators.Parsec
 
 -- Types

@@ -1,3 +1,5 @@
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE LambdaCase #-}
 module AoC2023.Day07 (main) where
 
 import Control.Lens.Operators ((<&>))
@@ -17,13 +19,14 @@ data Card
   | Ace
   deriving (Show, Eq, Ord)
 
-data Hand = Hand [Card]
+data Hand where
+  Hand :: [Card] -> Hand
   deriving (Eq)
 
 instance Show Hand where
   show :: Hand -> String
   show (Hand [c1, c2, c3, c4, c5]) =
-    [c1, c2, c3, c4, c5] >>= \c -> case c of
+    [c1, c2, c3, c4, c5] >>= \case
       Ace -> "A"
       King -> "K"
       Queen -> "Q"

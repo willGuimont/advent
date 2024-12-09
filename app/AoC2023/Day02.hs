@@ -1,7 +1,8 @@
+{-# LANGUAGE GADTs #-}
 module AoC2023.Day02 (main) where
 
 import Control.Monad.Except
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -11,9 +12,8 @@ data Color
   | Blue
   deriving (Eq, Ord, Show)
 
-data Draw = Draw
-  { cubes :: M.Map Color Int
-  }
+data Draw where
+  Draw :: {cubes :: M.Map Color Int} -> Draw
   deriving (Show)
 
 data Game = Game
@@ -75,7 +75,7 @@ isDrawPossible :: Draw -> Bool
 isDrawPossible d = M.foldr (&&) True $ M.mapWithKey (\k v -> v <= M.findWithDefault 0 k maxCubes) (cubes d)
 
 isGamePossible :: Game -> Bool
-isGamePossible g = and $ isDrawPossible <$> (draws g)
+isGamePossible g = all isDrawPossible (draws g)
 
 -- Part 2
 minCubes :: Game -> M.Map Color Int

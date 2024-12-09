@@ -2,12 +2,12 @@ module AoC2022.Day12 (main) where
 
 import Control.Lens
 import Control.Monad.Extra (untilJustM, when)
-import qualified Control.Monad.State.Strict as S
+import Control.Monad.State.Strict qualified as S
 import Data.Char (ord)
 import Data.List (elemIndex, elemIndices, foldl')
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Maybe (fromJust)
-import qualified Data.Set as SS
+import Data.Set qualified as SS
 
 -- Types
 type LocationId = Int

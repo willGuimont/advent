@@ -4,7 +4,7 @@ module AoC2022.Day08 (main) where
 
 import Control.Lens
 import Control.Monad.State
-import qualified Data.Set as S
+import Data.Set qualified as S
 
 -- Types
 newtype World = World {_visible :: S.Set (Int, Int)} deriving (Show)
@@ -21,7 +21,7 @@ addVisibles coordsTrans forest = do
     pos = [0 .. forestSize - 1]
     coords = fmap coordsTrans <$> [[(x, y) | y <- pos] | x <- pos]
     getAt (x, y) = forest !! x !! y
-    visibleRow row = snd . foldl (\(m, ts) p -> if getAt p > m then (getAt p, p : ts) else (m, ts)) (-1, []) $ row
+    visibleRow = snd . foldl (\(m, ts) p -> if getAt p > m then (getAt p, p : ts) else (m, ts)) (-1, [])
 
 flipY :: Int -> (Int, Int) -> (Int, Int)
 flipY size (x, y) = (x, size - y - 1)

@@ -4,8 +4,8 @@ module AoC2015.Day06 (main) where
 
 import Control.Lens
 import Control.Monad.Except
-import qualified Data.Set as S
-import qualified Data.Map as M
+import Data.Map qualified as M
+import Data.Set qualified as S
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -56,8 +56,7 @@ parseInstruction = do
   _ <- space
   _ <- string "through"
   _ <- space
-  toPos' <- parsePos
-  return $ Instruction switch' fromPos' toPos'
+  Instruction switch' fromPos' <$> parsePos
 
 parseInstructionPlan :: Parser [Instruction]
 parseInstructionPlan = parseInstruction `sepBy` newline
@@ -80,7 +79,7 @@ applyInstructionPlan is w = foldl apply w is
     apply w' i = foldl (\w'' p -> applyInstruction w'' (view switch i) p) w' $ positions (view fromPos i) (view toPos i)
     positions (fx, fy) (tx, ty) = (,) <$> [fx .. tx] <*> [fy .. ty]
 
-addWithDefault :: Ord k => k -> Int -> M.Map k Int -> M.Map k Int
+addWithDefault :: (Ord k) => k -> Int -> M.Map k Int -> M.Map k Int
 addWithDefault k v m = minZero
   where
     newMap = if k `M.member` m then M.update (return . (+ v)) k m else M.insert k v m

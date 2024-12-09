@@ -4,7 +4,7 @@ module AoC2022.Day10 (main) where
 
 import Control.Lens
 import Control.Monad.Except (throwError)
-import qualified Data.List.Split as LS
+import Data.List.Split qualified as LS
 import Text.ParserCombinators.Parsec
 
 -- Types

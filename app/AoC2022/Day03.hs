@@ -4,7 +4,7 @@ import Control.Monad.State
 import Data.Char (isLower, isUpper, ord)
 import Data.List (intersect, nub)
 import Data.List.Split
-import qualified Data.Map as M
+import Data.Map qualified as M
 
 splitCompartment :: String -> (String, String)
 splitCompartment x = splitAt splitIdx x

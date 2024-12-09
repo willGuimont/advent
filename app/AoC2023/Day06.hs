@@ -72,8 +72,8 @@ numWins time distance = f $ solveRace time distance
       where
         z1 = floor (max x y)
         z2 = ceiling (min x y)
-        sol1 = -z1 * z1 + time * z1 - distance
-        sol2 = -z2 * z2 + time * z2 - distance
+        sol1 = - (z1 * z1) + time * z1 - distance
+        sol2 = - (z2 * z2) + time * z2 - distance
         d1 = if sol1 == 0 then 1 else 0
         d2 = if sol2 == 0 then 1 else 0
     f _ = error "Invalid number of solutions"

@@ -4,9 +4,9 @@ module AoC2022.Day07 (main) where
 
 import Control.Lens hiding (noneOf)
 import Control.Monad.Except (throwError)
-import qualified Control.Monad.State as S
+import Control.Monad.State qualified as S
 import Data.List (elemIndices, isPrefixOf, singleton)
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Text.ParserCombinators.Parsec
 
 -- Types
@@ -130,7 +130,7 @@ main = do
   let dirs = view directories fileSystem
   let sizes = getDirSize fileSystem <$> dirs
   print $ sum . filter (<= 100000) $ sizes
-  
+
   let totalOccupied = getDirSize fileSystem "/"
   let toDelete = getSpaceToDelete totalOccupied
   print $ minimum . filter (>= toDelete) $ sizes

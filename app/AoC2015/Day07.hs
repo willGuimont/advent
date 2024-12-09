@@ -1,9 +1,9 @@
 module AoC2015.Day07 (main) where
 
 import Control.Monad.Except
-import qualified Control.Monad.State as S
+import Control.Monad.State qualified as S
 import Data.Bits (complement, shiftL, shiftR, (.&.), (.|.))
-import qualified Data.Map as M
+import Data.Map qualified as M
 import Data.Maybe (isNothing)
 import Data.Word (Word16)
 import Text.ParserCombinators.Parsec
@@ -31,8 +31,7 @@ parseProvide :: Parser Instruction
 parseProvide = do
   var <- parseVariable
   _ <- string " -> "
-  name <- parseVariable
-  return $ Provide var name
+  Provide var <$> parseVariable
 
 parseAnd :: Parser Instruction
 parseAnd = do
@@ -40,8 +39,7 @@ parseAnd = do
   _ <- string " AND "
   op2 <- parseVariable
   _ <- string " -> "
-  out <- parseVariable
-  return $ And op1 op2 out
+  And op1 op2 <$> parseVariable
 
 parseOr :: Parser Instruction
 parseOr = do
@@ -49,8 +47,7 @@ parseOr = do
   _ <- string " OR "
   op2 <- parseVariable
   _ <- string " -> "
-  out <- parseVariable
-  return $ Or op1 op2 out
+  Or op1 op2 <$> parseVariable
 
 parseLShift :: Parser Instruction
 parseLShift = do
@@ -58,8 +55,7 @@ parseLShift = do
   _ <- string " LSHIFT "
   val <- read <$> many1 digit
   _ <- string " -> "
-  out <- parseVariable
-  return $ Lshift op val out
+  Lshift op val <$> parseVariable
 
 parseRShift :: Parser Instruction
 parseRShift = do
@@ -67,15 +63,14 @@ parseRShift = do
   _ <- string " RSHIFT "
   val <- read <$> many1 digit
   _ <- string " -> "
-  out <- parseVariable
-  return $ Rshift op val out
+  Rshift op val <$> parseVariable
 
 parseNot :: Parser Instruction
 parseNot = do
   _ <- string "NOT "
   name <- parseVariable
   _ <- string " -> "
-  out <- parseVariable
+  out <- many1 alphaNum
   return $ Not name out
 
 parseInstruction :: Parser Instruction
