@@ -59,7 +59,6 @@ partOne input = do
   let stones' = nTimes 25 blink stones
   let result = sum $ elems stones'
   print result
-  -- let oneBlink = toStones . concat $ elems <$> mapWithKey blinkStone stones
 
 partTwo :: String -> IO ()
 partTwo input = do
