@@ -3,7 +3,7 @@
 module Main (main) where
 
 import Advent
-import AoC2024.Day09
+import AoC2024.Day10
 import Data.Text (unpack)
 import System.Environment (getEnv)
 
@@ -12,10 +12,17 @@ year :: Integer
 year = 2024
 
 day :: Integer
-day = 9
+day = 10
 
 example :: String
-example = "2333133121414131402\n"
+example = "89010123\n\
+\78121874\n\
+\87430965\n\
+\96549874\n\
+\45678903\n\
+\32019012\n\
+\01329801\n\
+\10456732\n"
 
 -- AoC wrapper
 getSession :: IO String
