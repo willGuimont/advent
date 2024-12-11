@@ -1,8 +1,7 @@
 module AoC2024.Day11 (partOne, partTwo) where
 
-import Data.HashMap.Strict (HashMap, empty, insertWith, union, mapWithKey, elems)
+import Data.HashMap.Strict (HashMap, elems, empty, insertWith, mapWithKey, union)
 import Text.ParserCombinators.Parsec
-import GHC.Real (reduce)
 
 -- Parsing
 number :: Parser (Int, Int)
@@ -47,7 +46,7 @@ blink = toStones . concat . elems . mapWithKey blinkStone
 nTimes :: Int -> (a -> a) -> (a -> a)
 nTimes 0 _ = id
 nTimes 1 f = f
-nTimes n f = f . nTimes (n-1) f
+nTimes n f = f . nTimes (n - 1) f
 
 -- Parts
 partOne :: String -> IO ()
@@ -69,4 +68,3 @@ partTwo input = do
   let stones' = nTimes 75 blink stones
   let result = sum $ elems stones'
   print result
-
