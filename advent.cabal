@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.37.0.
+-- This file has been generated from package.yaml by hpack version 0.38.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -112,6 +112,7 @@ executable aoc-exe
       AoC2024.Day09
       AoC2024.Day10
       AoC2024.Day11
+      AoC2025.Day01
       Paths_advent
   autogen-modules:
       Paths_advent

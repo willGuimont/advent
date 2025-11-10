@@ -3,16 +3,16 @@
 module Main (main) where
 
 import Advent
-import AoC2024.Day11
+import AoC2025.Day01
 import Data.Text (unpack)
 import System.Environment (getEnv)
 
 -- Changes daily
 year :: Integer
-year = 2024
+year = 2025
 
 day :: Integer
-day = 11
+day = 1
 
 example :: String
 example = "125 17\n"
