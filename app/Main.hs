@@ -15,7 +15,16 @@ day :: Integer
 day = 1
 
 example :: String
-example = "125 17\n"
+example = "L68\n\
+\L30\n\
+\R48\n\
+\L5\n\
+\R60\n\
+\L55\n\
+\L1\n\
+\L99\n\
+\R14\n\
+\L82\n"
 
 -- AoC wrapper
 getSession :: IO String
@@ -30,14 +39,14 @@ adventOptions = do
 
 main :: IO ()
 main = do
-  putStrLn "### Example ###"
+  putStrLn "\n### Example ###"
   _ <- partOne example
   _ <- partTwo example
 
   opt <- adventOptions
   (Right input) <- runAoC opt $ AoCInput (mkDay_ day)
   let input' = unpack input
-  putStrLn "### Real input ###"
+  putStrLn "\n### Real input ###"
   _ <- partOne input'
   _ <- partTwo input'
 
