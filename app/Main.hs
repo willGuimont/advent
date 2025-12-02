@@ -3,7 +3,13 @@
 module Main (main) where
 
 import Advent
-import AoC2025.Day01
+    ( defaultAoCOpts,
+      runAoC,
+      mkDay_,
+      AoC(AoCInput),
+      AoCOpts,
+      AoCUserAgent(..) )
+import AoC2025.Day02 ( partOne, partTwo )
 import Data.Text (unpack)
 import System.Environment (getEnv)
 
@@ -12,19 +18,10 @@ year :: Integer
 year = 2025
 
 day :: Integer
-day = 1
+day = 2
 
 example :: String
-example = "L68\n\
-\L30\n\
-\R48\n\
-\L5\n\
-\R60\n\
-\L55\n\
-\L1\n\
-\L99\n\
-\R14\n\
-\L82\n"
+example = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"
 
 -- AoC wrapper
 getSession :: IO String
