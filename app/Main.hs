@@ -9,7 +9,7 @@ import Advent
       AoC(AoCInput),
       AoCOpts,
       AoCUserAgent(..) )
-import AoC2025.Day02 ( partOne, partTwo )
+import AoC2025.Day03 ( partOne, partTwo )
 import Data.Text (unpack)
 import System.Environment (getEnv)
 
@@ -18,10 +18,13 @@ year :: Integer
 year = 2025
 
 day :: Integer
-day = 2
+day = 3
 
 example :: String
-example = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"
+example = "987654321111111\n\
+\811111111111119\n\
+\234234234234278\n\
+\818181911112111"
 
 -- AoC wrapper
 getSession :: IO String
