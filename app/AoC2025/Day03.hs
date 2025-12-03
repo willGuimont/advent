@@ -1,15 +1,22 @@
 module AoC2025.Day03 (partOne, partTwo) where
 
-import Data.List.Extra (chunksOf, singleton)
+import Data.Array qualified as A
+import Data.List.Extra (singleton)
 import Data.String.Utils
+import Debug.Trace (trace)
 import Text.Parsec (endOfLine)
 import Text.ParserCombinators.Parsec
-import Data.List (subsequences)
-import Control.Concurrent.Async (mapConcurrently)
 
 -- Types
 type Cell = Int
+
 type Bank = [Cell]
+
+type UpToIndex = Int
+
+type NumChosen = Int
+
+type DynArray = A.Array (UpToIndex, NumChosen) Cell
 
 -- Parsing
 parseSingleInt :: Parser Int
@@ -29,20 +36,34 @@ parseInput s = case parse parseBanks "lists" (rstrip s) of
 -- Logic
 allOrderedPairs :: Bank -> [[Cell]]
 allOrderedPairs [] = []
-allOrderedPairs bank@(x:xs) = [[x, y] | y <- xs] <> allOrderedPairs xs
-
-allBatteries :: Int -> Bank -> [[Cell]]
-allBatteries 0 _ = [[]]
-allBatteries _ [] = []
-allBatteries n xs = filter ((== n) . length) $ subsequences xs
+allOrderedPairs (x : xs) = [[x, y] | y <- xs] <> allOrderedPairs xs
 
 asJolts :: [Cell] -> Int
 asJolts xs = read (concatMap show xs)
 
--- helper
 safeMaximum :: [Int] -> Int
 safeMaximum [] = 0
 safeMaximum xs = maximum xs
+
+combineCells :: Cell -> Cell -> Cell
+combineCells a b = read (show a <> show b)
+
+maxFromNCells :: Int -> Bank -> Cell
+maxFromNCells n bank = finish $ foldl iter startState pairs
+  where
+    pairs =
+      [ (upTo, chosen)
+        | upTo <- [0 .. length bank],
+          chosen <- [0 .. n]
+      ]
+    startState = A.array ((0, 0), (length bank, n)) [((i, j), 0) | i <- [0 .. length bank], j <- [0 .. n]]
+    iter state (0, _) = state
+    iter state (_, 0) = state
+    iter state (upTo, chosen) = if chosen > upTo then state else state A.// [((upTo, chosen), max valueSkip valueTake)]
+      where
+        valueSkip = state A.! (upTo - 1, chosen)
+        valueTake = combineCells (state A.! (upTo - 1, chosen - 1)) (bank !! (upTo - 1))
+    finish state = state A.! (length bank, n)
 
 -- Parts
 partOne :: String -> IO ()
@@ -56,5 +77,5 @@ partTwo :: String -> IO ()
 partTwo input = do
   putStrLn "Part Two"
   let (Right banks) = parseInput input
-  results <- mapConcurrently (\bank -> return $! safeMaximum $ map asJolts $ allBatteries 12 bank) banks
-  print $ sum results
+  let cs = maxFromNCells 12 <$> banks
+  print $ sum cs
